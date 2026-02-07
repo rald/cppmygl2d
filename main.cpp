@@ -19,7 +19,6 @@ bool incirc(int x,int y,int cx,int cy,int cr) {
 }
 
 void star(Turtle* turtle,double s) {
-	turtle->turn(18);
 	for(int i = 0; i < 5; i++) {
 		turtle->move(s);
 		turtle->turn(144);
@@ -33,7 +32,20 @@ void draw() {
 	Turtle* turtle = new Turtle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
 	turtle->setPenColor(255, 255, 0);
+
+	turtle->turn(18);
+
 	star(turtle,100);
+
+	turtle->penUp();
+	turtle->move(50);
+	turtle->penDown();
+	star(turtle,50);
+
+	turtle->penUp();
+	turtle->move(25);
+	turtle->penDown();
+	star(turtle,25);
 
 	glFlush();
 	glfwSwapBuffers();
@@ -51,6 +63,9 @@ int main(int argc, char** argv) {
 
 	draw();
 
+	glfwSleep(5);
+
+/*
 	while(!quit) {
 		currentTime=glfwGetTime();
 		deltaTime=currentTime-lastTime;
@@ -66,6 +81,8 @@ int main(int argc, char** argv) {
 
 		if(glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS) quit = true;
 	}
+*/
+
 
 	return 0;
 }

@@ -15,6 +15,8 @@ public:
 	void turn(double a);
 	void jump(double i, double j);
 	void face(double a);
+	void penDown();
+	void penUp();
 	void setPenColor(int r, int g, int b);
 };
 

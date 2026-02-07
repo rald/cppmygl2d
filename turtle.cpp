@@ -34,6 +34,14 @@ void Turtle::face(double a) {
 	h=a;
 }
 
+void Turtle::penDown() {
+	isPenDown=true;
+}
+
+void Turtle::penUp() {
+	isPenDown=false;
+}
+
 void Turtle::setPenColor(int r,int g,int b) {
 	MyGL2D::setColor(r,g,b);
 }
