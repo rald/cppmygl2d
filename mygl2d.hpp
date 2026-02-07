@@ -21,7 +21,5 @@ public:
 	void fillPolygon(const int* points, int num_points);
 };
 
-
-
 #endif /* MYGL2D_H */
 

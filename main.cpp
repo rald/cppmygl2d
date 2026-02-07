@@ -1,7 +1,3 @@
-#include <stdbool.h>
-#include <math.h>
-
-#include "glfw.h"
 #include "mygl2d.hpp"
 
 #define GAME_TITLE "Game"
