@@ -1,1 +1,1 @@
-# cppmygl2d
+# mygl2d
