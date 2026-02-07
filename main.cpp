@@ -1,4 +1,5 @@
 #include "mygl2d.hpp"
+#include "turtle.hpp"
 
 #define GAME_TITLE "Game"
 
@@ -9,8 +10,6 @@ bool quit=false;
 
 double lastTime=0,currentTime=0,deltaTime=0;
 
-MyGL2D gl;
-
 bool inrect(int x,int y,int rx,int ry,int w,int h) {
 	return x>=rx && x<=rx+w && y>=ry && y<=ry+h;
 }
@@ -19,27 +18,28 @@ bool incirc(int x,int y,int cx,int cy,int cr) {
 	return (cx-x)*(cx-x) + (cy-y)*(cy-y) < cr*cr;
 }
 
-void update(double deltaTime) {
+void star(Turtle* turtle,double s) {
+	turtle->turn(18);
+	for(int i = 0; i < 5; i++) {
+		turtle->move(s);
+		turtle->turn(144);
+	}
 }
 
 void draw() {
 	glLoadIdentity();
 	glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
 
-	gl.clearScreen();
+	Turtle* turtle = new Turtle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
-	gl.setColor(255,255,255);
-
-	gl.drawPoint(26,25);
-	gl.drawLine(56,1,100,50);
-	gl.drawRect(110,1,50,50);
-	gl.fillRect(165,0,50,50);
-	gl.drawCircle(246,26,25);
-	gl.fillCircle(301,26,25);
+	turtle->setPenColor(255, 255, 0);
+	star(turtle,100);
 
 	glFlush();
 	glfwSwapBuffers();
 }
+
+void update(double deltaTime) {}
 
 int main(int argc, char** argv) {
 	glfwInit();
@@ -49,16 +49,22 @@ int main(int argc, char** argv) {
 	glfwSetWindowTitle(GAME_TITLE);
 //	glfwDisable(GLFW_MOUSE_CURSOR);
 
+	draw();
+
 	while(!quit) {
 		currentTime=glfwGetTime();
 		deltaTime=currentTime-lastTime;
 		lastTime=currentTime;
 
-		update(deltaTime);
+//		update(deltaTime);
 
-		draw();
+//		draw();
 
-		quit = glfwGetKey(GLFW_KEY_ESC) | !glfwGetWindowParam(GLFW_OPENED);
+		glFlush();
+		glfwSwapBuffers();
+		glfwPollEvents();
+
+		if(glfwGetKey(GLFW_KEY_ESC) == GLFW_PRESS) quit = true;
 	}
 
 	return 0;
